@@ -5,6 +5,7 @@ import Navbar from "./components/Navbar/Navbar";
 import { getLoggedIn, logout } from "./services/auth";
 import routes from "./config/routes";
 import * as USER_HELPERS from "./utils/userToken";
+import 'antd/dist/antd.css';
 
 export default function App() {
   const [user, setUser] = useState(null);
