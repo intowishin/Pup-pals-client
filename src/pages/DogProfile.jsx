@@ -1,5 +1,5 @@
 import React from "react";
-import { Form, Select, Button, Input, InputNumber } from "antd";
+import { Form, Select, Button, Input, InputNumber, Space, Card } from "antd";
 const { Option } = Select;
 const { TextArea } = Input;
 const onChange = (e) => {
@@ -22,10 +22,11 @@ const validateMessages = {
     range: "${label} must be between ${min} and ${max}",
   },
 };
-const UserProfile = () => {
+const DogProfile = () => {
   return (
     <div>
-      <h1>Hooman Profile</h1>
+    <Space direction="vertical" size="small" style={{ display: 'flex' }}>
+    <Card title="Pup Profile" size="large">
       <Form
         {...layout}
         name="nest-messages"
@@ -41,7 +42,7 @@ const UserProfile = () => {
             },
           ]}
         >
-          <Input allowClear placeholder="Vending machine" />
+          <Input allowClear placeholder="" />
         </Form.Item>
 
         <label htmlFor="input-age">Age: </label>
@@ -57,6 +58,20 @@ const UserProfile = () => {
             },
           ]}
         />
+         <label htmlFor="input-size">Size: </label>
+        <Select
+          style={{
+            width: 120,
+          }}
+          allowClear
+        >
+          <Option value="miniature">Miniature</Option>
+          <Option value="small">Small</Option>
+          <Option value="medium">Medium</Option>
+          <Option value="large">Large</Option>
+          <Option value="verylarge">Very Large</Option>
+
+        </Select>
         <label htmlFor="input-gender">Gender: </label>
         <Select
           style={{
@@ -67,20 +82,30 @@ const UserProfile = () => {
           <Option value="female">Female</Option>
           <Option value="male">Male</Option>
         </Select>
-        <label htmlFor="input-text">About my hooman: </label>
+        <Form.Item
+          label="Breed"
+          name="breed"
+         
+        >
+          <Input allowClear placeholder="" />
+        </Form.Item>
+        <label htmlFor="input-text">About me: </label>
         <TextArea
           allowClear
           showCount
           maxLength={100}
-          placeholder="My hooman is the best..."
+          placeholder="I love to eat"
           onChange={onChange}
         />
         <Button>Submit</Button>
       </Form>
+      </Card>
+      </Space>
+
     </div>
   );
 };
 
-export default UserProfile;
+export default DogProfile;
 
 

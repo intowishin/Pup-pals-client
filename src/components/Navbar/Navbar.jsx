@@ -19,6 +19,9 @@ const Navbar = (props) => {
       <div className="nav__authLinks">
         {props.user ? (
           <>
+          <Link to={PATHS.DOGPROFILE} className="authLink">
+            Pup Profile
+            </Link>
             <Link to={PATHS.USERPROFILE} className="authLink">
             Hooman Profile
             </Link>

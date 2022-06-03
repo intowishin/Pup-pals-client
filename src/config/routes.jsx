@@ -4,6 +4,7 @@ import Login from "../pages/LogIn";
 import Signup from "../pages/Signup";
 import * as PATHS from "../utils/paths";
 import UserProfile from "../pages/UserProfile";
+import DogProfile from "../pages/DogProfile";
 
 const routes = (props) => {
   const { user } = props;
@@ -25,6 +26,14 @@ const routes = (props) => {
       path: PATHS.USERPROFILE,
       element: user || true ? (
         <UserProfile {...props} />
+      ) : (
+        <Navigate to={PATHS.LOGINPAGE} replace />
+      ),
+    },
+    {
+      path: PATHS.DOGPROFILE,
+      element: user || true ? (
+        <DogProfile {...props} />
       ) : (
         <Navigate to={PATHS.LOGINPAGE} replace />
       ),
