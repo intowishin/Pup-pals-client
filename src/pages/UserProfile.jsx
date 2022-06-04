@@ -19,7 +19,7 @@ const UserProfile = () => {
   const [user, setUser] = useState();
 
   const getProfileDetails = async () => {
-    const { data } = await axios.get(`http://localhost:5005/user/${id}`);
+    const { data } = await axios.get(`http://localhost:5005/api/user/${id}`);
     setUser(() => data);
     setFormData(() => data);
   };
@@ -27,11 +27,11 @@ const UserProfile = () => {
 
   const updateProfile = async () => {
     const { data } = await axios.post(
-      `http://localhost:5005/user/${id}`,
+      `http://localhost:5005/api/user/${id}`,
       formData
     );
     setUser(data);
-    navigateTo("/dog/profile");
+    
   };
 
   useEffect(() => {
@@ -49,10 +49,26 @@ const UserProfile = () => {
     });
   };
 
+  const onChangeNumber = (value) => {
+    setFormData({
+      ...formData,
+      age: value,
+    });
+  };
+
+  const onChangeSelect = (value) => {
+    setFormData({
+      ...formData,
+      gender: value,
+  });
+  };
+
+
   const onSubmit = (e) => {
     e.preventDefault();
     try {
       updateProfile();
+      navigateTo("/dog/profile");
     } catch (err) {
       console.log(err);
     }
@@ -84,16 +100,17 @@ const UserProfile = () => {
               max: 99,
             },
           ]}
-          onChange={onChange}
+          onChange={onChangeNumber}
         />
         <label htmlFor="input-gender">Gender: </label>
         <Select
           style={{
             width: 120,
           }}
+          name="gender"
           value={formData.gender}
           allowClear
-          onChange={onChange}
+          onChange={onChangeSelect}
         >
           <Option value="female">Female</Option>
           <Option value="male">Male</Option>
@@ -103,6 +120,7 @@ const UserProfile = () => {
           allowClear
           showCount
           maxLength={100}
+          name="about"
           value={formData.about}
           placeholder="My hooman is the best..."
           onChange={onChange}
