@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useNavigate } from "react-router-dom";
 import LoadingComponent from "./components/Loading";
 import Navbar from "./components/Navbar/Navbar";
 import { getLoggedIn, logout } from "./services/auth";
@@ -10,6 +10,7 @@ import 'antd/dist/antd.css';
 export default function App() {
   const [user, setUser] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const accessToken = USER_HELPERS.getUserToken();
@@ -39,7 +40,8 @@ export default function App() {
       }
       USER_HELPERS.removeUserToken();
       setIsLoading(false);
-      return setUser(null);
+      setUser(null);
+      return navigate("/");
     });
   }
 
