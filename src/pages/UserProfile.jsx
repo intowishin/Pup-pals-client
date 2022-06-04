@@ -1,45 +1,72 @@
-import React from "react";
+import { useState, useEffect } from "react";
 import { Form, Select, Button, Input, InputNumber } from "antd";
+import { useParams, useNavigate } from "react-router-dom";
+import axios from "axios";
 const { Option } = Select;
 const { TextArea } = Input;
-const onChange = (e) => {
-  console.log("Change:", e.target.value);
-};
-const layout = {
-  labelCol: {
-    span: 10,
-  },
-  wrapperCol: {
-    span: 4,
-  },
-};
-const validateMessages = {
-  required: "${label} is required!",
-  types: {
-    number: "${label} is not a valid number!",
-  },
-  number: {
-    range: "${label} must be between ${min} and ${max}",
-  },
-};
+
 const UserProfile = () => {
+  const defaultFormData = {
+    name: "",
+    age: 0,
+    gender: "",
+    about: "",
+  };
+
+  const [formData, setFormData] = useState(defaultFormData);
+  const navigateTo = useNavigate();
+  const { id } = useParams();
+  const [user, setUser] = useState();
+
+  const getProfileDetails = async () => {
+    const { data } = await axios.get(`http://localhost:5005/user/${id}`);
+    setUser(() => data);
+    setFormData(() => data);
+  };
+
+
+  const updateProfile = async () => {
+    const { data } = await axios.post(
+      `http://localhost:5005/user/${id}`,
+      formData
+    );
+    setUser(data);
+    navigateTo("/dog/profile");
+  };
+
+  useEffect(() => {
+    try {
+      getProfileDetails();
+    } catch (error) {
+      console.log(error);
+    }
+  }, []);
+
+  const onChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const onSubmit = (e) => {
+    e.preventDefault();
+    try {
+      updateProfile();
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   return (
     <div>
       <h1>Hooman Profile</h1>
-      <Form
-        {...layout}
-        name="nest-messages"
-        validateMessages={validateMessages}
-      >
+      <Form onSubmit={onSubmit}>
         <Form.Item
           label="Name"
           name="name"
-          rules={[
-            {
-              required: true,
-              message: "Please input your name!",
-            },
-          ]}
+          value={formData.name}
+          onChange={onChange}
         >
           <Input allowClear placeholder="Vending machine" />
         </Form.Item>
@@ -48,6 +75,7 @@ const UserProfile = () => {
         <InputNumber
           type="number"
           name="age"
+          value={formData.age}
           placeholder="Age"
           rules={[
             {
@@ -56,13 +84,16 @@ const UserProfile = () => {
               max: 99,
             },
           ]}
+          onChange={onChange}
         />
         <label htmlFor="input-gender">Gender: </label>
         <Select
           style={{
             width: 120,
           }}
+          value={formData.gender}
           allowClear
+          onChange={onChange}
         >
           <Option value="female">Female</Option>
           <Option value="male">Male</Option>
@@ -72,6 +103,7 @@ const UserProfile = () => {
           allowClear
           showCount
           maxLength={100}
+          value={formData.about}
           placeholder="My hooman is the best..."
           onChange={onChange}
         />
@@ -82,5 +114,3 @@ const UserProfile = () => {
 };
 
 export default UserProfile;
-
-

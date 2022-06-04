@@ -6,7 +6,6 @@ import logo from "../../images/logo2.png";
 // import * as CONSTS from "../../utils/consts";
 
 const Navbar = (props) => {
-
   return (
     <nav>
     <div className="logo">
@@ -22,7 +21,8 @@ const Navbar = (props) => {
           <Link to={PATHS.DOGPROFILE} className="authLink">
             Pup Profile
             </Link>
-            <Link to={PATHS.USERPROFILE} className="authLink">
+            <Link to={PATHS.USERPROFILE + '/' + props.user._id} className="authLink">
+            
             Hooman Profile
             </Link>
             

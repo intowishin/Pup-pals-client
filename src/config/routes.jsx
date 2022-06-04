@@ -23,7 +23,7 @@ const routes = (props) => {
       element: <Login {...props} />,
     },
     {
-      path: PATHS.USERPROFILE,
+      path: PATHS.USERPROFILE + '/:id',
       element: user || true ? (
         <UserProfile {...props} />
       ) : (
