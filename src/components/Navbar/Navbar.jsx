@@ -2,14 +2,18 @@ import React from "react";
 import { Link } from "react-router-dom";
 import "./Navbar.css";
 import * as PATHS from "../../utils/paths";
-import logo from "../../images/logo2.png";
+import logo from "../../images/logo3.png";
+import dog from "../../images/dogpeeking2.png";
 // import * as CONSTS from "../../utils/consts";
 
 const Navbar = (props) => {
   return (
     <nav>
     <div className="logo">
-    <img src={logo} width="100" alt="logo"/>
+    <img src={logo} width="85px" alt="logo"/>
+    </div>
+    <div className="dog">
+      <img src={dog} width="350px" alt="dog"/>
     </div>
       {/* <Link to={PATHS.HOMEPAGE} className="nav__projectName">
         {CONSTS.CAPITALIZED_APP} - created with IronLauncher
@@ -39,6 +43,7 @@ const Navbar = (props) => {
         )}
       </div>
     </nav>
+    
   );
 };
 

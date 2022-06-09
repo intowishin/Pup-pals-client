@@ -1,5 +1,5 @@
 nav {
-  height: 80px;
+  height: 200px;
   padding: 1rem;
   position: relative;
 
@@ -8,10 +8,19 @@ nav {
   background: rgb(238,231,174);
   background: linear-gradient(90deg, rgba(238,231,174,.5) 0%, rgba(148,233,208,.5) 100%);
   font-weight: 600;
+
+  border-bottom-left-radius: 50% 20%;
+  border-bottom-right-radius: 50% 20%;
+}
+
+.dog {
+  float: center;
+
 }
 
 .logo {
   float: left;
+  
 }
 
 .nav__authLinks {
