@@ -64,8 +64,7 @@ const UserProfile = () => {
   };
 
 
-  const onSubmit = (e) => {
-    e.preventDefault();
+  const onSubmit = () => {
     try {
       updateProfile();
       navigateTo("/dog/profile");
@@ -77,15 +76,14 @@ const UserProfile = () => {
   return (
     <div>
       <h1>Hooman Profile</h1>
-      <Form onSubmit={onSubmit}>
-        <Form.Item
+      <Form onFinish={onSubmit}>
+       <label htmlFor="input-name">Name: </label>
+          <Input allowClear placeholder="Vending machine" 
           label="Name"
           name="name"
           value={formData.name}
           onChange={onChange}
-        >
-          <Input allowClear placeholder="Vending machine" />
-        </Form.Item>
+          />
 
         <label htmlFor="input-age">Age: </label>
         <InputNumber
@@ -125,7 +123,7 @@ const UserProfile = () => {
           placeholder="My hooman is the best..."
           onChange={onChange}
         />
-        <Button>Submit</Button>
+        <Button htmlType="submit">Submit</Button>
       </Form>
     </div>
   );
