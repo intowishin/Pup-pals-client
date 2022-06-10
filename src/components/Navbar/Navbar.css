@@ -15,7 +15,8 @@ nav {
 
 .dog {
   float: center;
-
+  position: absolute;
+  z-index: 1;
 }
 
 .logo {

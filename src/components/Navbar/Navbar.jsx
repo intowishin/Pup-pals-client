@@ -8,13 +8,15 @@ import dog from "../../images/dogpeeking2.png";
 
 const Navbar = (props) => {
   return (
+    <>
+    <div className="dog">
+    <img src={dog} width="375px" alt="dog" />
+    </div>
     <nav>
     <div className="logo">
     <img src={logo} width="85px" alt="logo"/>
     </div>
-    <div className="dog">
-      <img src={dog} width="350px" alt="dog"/>
-    </div>
+   
       {/* <Link to={PATHS.HOMEPAGE} className="nav__projectName">
         {CONSTS.CAPITALIZED_APP} - created with IronLauncher
       </Link> */}
@@ -43,7 +45,7 @@ const Navbar = (props) => {
         )}
       </div>
     </nav>
-    
+    </>
   );
 };
 
