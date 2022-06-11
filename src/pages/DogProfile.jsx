@@ -26,8 +26,16 @@ const DogProfile = () => {
     setFormData(() => data);
   };
 
-  const updateProfile = async () => {
+  const createProfile = async () => {
     const { data } = await axios.post(
+      `http://localhost:5005/api/dog`,
+      formData
+    );
+    setUser(data);
+  };
+
+  const updateProfile = async () => {
+    const { data } = await axios.put(
       `http://localhost:5005/api/dog/${id}`,
       formData
     );
@@ -36,7 +44,7 @@ const DogProfile = () => {
 
   useEffect(() => {
     try {
-      getProfileDetails();
+      id && getProfileDetails();
     } catch (error) {
       console.log(error);
     }
@@ -65,14 +73,14 @@ const DogProfile = () => {
 
   const onChangeSize = (value) => {
     setFormData({
-      ...formData, 
+      ...formData,
       size: value,
     });
   };
 
   const onSubmit = () => {
     try {
-      updateProfile();
+      createProfile();
       navigateTo("/dog/profile");
     } catch (err) {
       console.log(err);
@@ -83,13 +91,15 @@ const DogProfile = () => {
       <Space direction="vertical" size="small" style={{ display: "flex" }}>
         <Card title="Pup Profile" size="large">
           <Form onFinish={onSubmit}>
-          <label htmlFor="input-name">Name: </label>
-          <Input allowClear placeholder="" 
-          label="Name"
-          name="name"
-          value={formData.name}
-          onChange={onChange}
-          />
+            <label htmlFor="input-name">Name: </label>
+            <Input
+              allowClear
+              placeholder=""
+              label="Name"
+              name="name"
+              value={formData.name}
+              onChange={onChange}
+            />
 
             <label htmlFor="input-age">Age: </label>
             <InputNumber
@@ -115,7 +125,6 @@ const DogProfile = () => {
               value={formData.size}
               allowClear
               onChange={onChangeSize}
-
             >
               <Option value="miniature">Miniature</Option>
               <Option value="small">Small</Option>
@@ -137,11 +146,13 @@ const DogProfile = () => {
               <Option value="male">Male</Option>
             </Select>
             <label htmlFor="input-breed">Breed: </label>
-              <Input allowClear placeholder="" 
-                name="breed"
-                value={formData.breed}
-                onChange={onChange}
-              />
+            <Input
+              allowClear
+              placeholder=""
+              name="breed"
+              value={formData.breed}
+              onChange={onChange}
+            />
             <label htmlFor="input-text">About me: </label>
             <TextArea
               allowClear
